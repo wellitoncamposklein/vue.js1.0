@@ -1,3 +1,8 @@
+/*
+* ($parent) para acessar de componentes filhos para os pais
+* $root.$children[0 -> posicao dos filhos]) || ||  ||  ||  ||  ||
+* */
+
 Vue.filter('doneLabel',function (value) {
     if (value == 0){
         return "Não Paga"
@@ -17,12 +22,69 @@ Vue.filter('statusGeneral',function (value) {
     }
 });
 
-var appComponent = Vue.extend({
+var billListComponent = Vue.extend({
     template:`
-        <h3>{{ title }}</h3>
-        <h5 :class="{'gray': status === false, 'green': status === 0, 'red': status > 0}">
-            {{ status | statusGeneral}}
-        </h5>
+        <style type="text/css">
+            .pago{
+                color: green;
+            }
+            .nao-pago{
+                color: red;
+            }
+        </style>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>Vencimento</th>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Paga?</th>
+                <th>Acoes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="bill in bills">
+                <td>{{bill.date_due}}</td>
+                <td>{{bill.name}}</td>
+                <td>{{bill.value | currency 'R$ ' 2}}</td>
+                <td class="minha-classe" :class="{'nao-pago': bill.done === 0,'pago': bill.done === 1}">
+                    {{bill.done | doneLabel}}
+                </td>
+                <td>
+                    <a href="#" @click.prevent="loadbille(bill)">Editar</a> |
+                    <a href="#" @click.prevent="deletebille(index)">Excluir</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    `,
+    data: function () {
+        return{
+            bills: [
+                {date_due: '20/08/2017', name:'Conta de luz',value: '70.99', done:1},
+                {date_due: '10/08/2017', name:'Conta de agua',value: '95.99', done:0},
+                {date_due: '10/08/2017', name:'Internet',value: '200.99', done:0}
+            ]
+        };
+    },
+    methods:{
+        loadbille: function (bill) {
+            this.bille = bill;
+            this.$root.$children[0].activedView = 1;
+            this.$root.$children[0].formType = 'update';
+        },
+        deletebille: function (index) {
+            if(confirm("Deseja realmente excluir essa conta?")){
+                this.bills.splice(index,1);
+            }
+        }
+    }
+});
+
+Vue.component('bill-list-component',billListComponent);
+
+var menuComponent = Vue.extend({
+    template: `
         <nav>
             <ul>
                 <li v-for="menu in menus">
@@ -30,32 +92,51 @@ var appComponent = Vue.extend({
                 </li>
             </ul>
         </nav>
+    `,
+    data: function () {
+        return{
+            menus: [
+                {id: 0,name:"Listar Contas"},
+                {id: 1,name:"Criar Conta"}
+            ],
+        };
+    },
+    methods:{
+        showView: function (id) {
+            this.$root.$children[0].activedView = id;
+            if (id == 1){
+                this.$root.$children[0].formType = 'insert';
+            }
+        }
+    }
+});
+
+Vue.component('menu-component',menuComponent);
+
+var appComponent = Vue.extend({
+    template:`
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style type="text/css">         
+            .green{
+                color: green;
+            }
+            .gray{
+                color: gray;
+            }
+            .red{
+                color: red;
+            }
+            .minha-classe{
+                background-color: cornsilk;
+            }
+        </style>
+        <h3>{{ title }}</h3>
+        <h5 :class="{'gray': status === false, 'green': status === 0, 'red': status > 0}">
+            {{ status | statusGeneral}}
+        </h5>
+        <menu-component></menu-component>
         <div v-if="activedView == 0">
-            <table border="1" cellpadding="10">
-                <thead>
-                <tr>
-                    <th>Vencimento</th>
-                    <th>Nome</th>
-                    <th>Valor</th>
-                    <th>Paga?</th>
-                    <th>Acoes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="bill in bills">
-                    <td>{{bill.date_due}}</td>
-                    <td>{{bill.name}}</td>
-                    <td>{{bill.value | currency 'R$ ' 2}}</td>
-                    <td class="minha-classe" :class="{'nao-pago': bill.done === 0,'pago': bill.done === 1}">
-                        {{bill.done | doneLabel}}
-                    </td>
-                    <td>
-                        <a href="#" @click.prevent="loadbille(bill)">Editar</a> |
-                        <a href="#" @click.prevent="deletebille(index)">Excluir</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <bill-list-component></bill-list-component>
         </div>
         <div v-if="activedView == 1">
             <form name="form" @submit.prevent="submit">
@@ -77,10 +158,6 @@ var appComponent = Vue.extend({
         return {
             test: '',
             title: "Contas a Pagar",
-            menus: [
-                {id: 0,name:"Listar Contas"},
-                {id: 1,name:"Criar Conta"}
-            ],
             activedView: 0,
             formType:'insert',
             bille: {
@@ -96,11 +173,7 @@ var appComponent = Vue.extend({
                 'Internet',
                 'Gasolina'
             ],
-            bills: [
-                {date_due: '20/08/2017', name:'Conta de luz',value: '70.99', done:1},
-                {date_due: '10/08/2017', name:'Conta de agua',value: '95.99', done:0},
-                {date_due: '10/08/2017', name:'Internet',value: '200.99', done:0}
-            ]
+
         };
     },
     computed:{
@@ -118,12 +191,6 @@ var appComponent = Vue.extend({
         }
     },
     methods:{
-        showView: function (id) {
-            this.activedView = id;
-            if (id == 1){
-                this.formType = 'insert';
-            }
-        },
         submit: function () {
             if (this.formType == 'insert'){
                 this.bills.push(this.bille);
@@ -138,16 +205,6 @@ var appComponent = Vue.extend({
 
             this.activedView = 0;
         },
-        loadbille: function (bill) {
-            this.bille = bill;
-            this.activedView = 1;
-            this.formType = 'update';
-        },
-        deletebille: function (index) {
-            if(confirm("Deseja realmente excluir essa conta?")){
-                this.bills.splice(index,1);
-            }
-        }
     }
 });
 
