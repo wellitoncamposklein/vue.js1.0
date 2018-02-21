@@ -20,7 +20,6 @@ window.menuComponent = Vue.extend({
     },
     methods:{
         showView: function (id) {
-            this.$dispatch('change-activedview',id);// root.$children[0].activedView = id;
             if (id == 1){
                 this.$dispatch('change-formtype','insert');//$root.$children[0].formType = 'insert';
             }

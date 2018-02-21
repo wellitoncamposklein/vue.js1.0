@@ -40,18 +40,13 @@ window.billListComponent = Vue.extend({
     `,
     data: function () {
         return{
-            bills: [
-                {date_due: '20/08/2017', name:'Conta de luz',value: '70.99', done:1},
-                {date_due: '10/08/2017', name:'Conta de agua',value: '95.99', done:0},
-                {date_due: '10/08/2017', name:'Internet',value: '200.99', done:0}
-            ]
+            bills: this.$root.$children[0].bills
         };
     },
     methods:{
         loadbille: function (bill) {
             //this.$root.$children[0].bille = bill;
             this.$dispatch('change-bill',bill);
-            this.$dispatch('change-activedview',1);
             this.$dispatch('change-formtype','update');
         },
         deletebille: function (bill) {
