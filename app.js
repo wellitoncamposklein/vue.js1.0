@@ -154,7 +154,7 @@ var billCreateComponent = Vue.extend({
         }
     }
 });
-
+//
 var appComponent = Vue.extend({
     components: {
         'menu-component':menuComponent,
