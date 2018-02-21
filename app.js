@@ -69,7 +69,8 @@ var billListComponent = Vue.extend({
     },
     methods:{
         loadbille: function (bill) {
-            this.$root.$children[0].bille = bill;
+            //this.$root.$children[0].bille = bill;
+            this.$dispatch('change-bill',bill);
             this.$dispatch('change-activedview',1);
             this.$dispatch('change-formtype','update');
         },
@@ -77,6 +78,11 @@ var billListComponent = Vue.extend({
             if(confirm("Deseja realmente excluir essa conta?")){
                 this.bills.$remove(bill);
             }
+        }
+    },
+    events:{
+        'new-bill': function (bill) {
+            this.bills.push(bill);
         }
     }
 });
@@ -125,7 +131,6 @@ var billCreateComponent = Vue.extend({
             <input type="button" @click="submit" value="Enviar"/>
         </form>
     `,
-    props:['bille'],
     data:function () {
         return{
             formType:'insert',
@@ -135,13 +140,19 @@ var billCreateComponent = Vue.extend({
                 'Conta de telefone',
                 'Internet',
                 'Gasolina'
-            ]
+            ],
+            bille: {
+                date_due: '',
+                name:'',
+                value: 0,
+                done: 1
+            },
         };
     },
     methods:{
         submit: function () {
             if (this.formType == 'insert'){
-                this.$parent.$refs.billListComponent.bills.push(this.bille);
+                this.$dispatch('new-bill',this.bille);
             }
 
             this.bille = {
@@ -151,7 +162,8 @@ var billCreateComponent = Vue.extend({
                 done: 1
             };
 
-            this.$parent.activedView = 0;
+            this.$dispatch('change-activedview',0);
+            // this.$parent.activedView = 0;
         }
     },
     events:{
@@ -160,7 +172,10 @@ var billCreateComponent = Vue.extend({
         },
         'change-formtype': function (formType) {
             this.formType = formType;
-        }
+        },
+        'change-bill': function (bill) {
+            this.bille = bill;
+        },
     }
 });
 //
@@ -200,18 +215,8 @@ var appComponent = Vue.extend({
     `,
     data: function(){
         return {
-            test: '',
             title: "Contas a Pagar",
             activedView: 0,
-            //formType:'insert',
-            bille: {
-                date_due: '',
-                name:'',
-                value: 0,
-                done: 1
-            },
-
-
         };
     },
     computed:{
@@ -236,6 +241,12 @@ var appComponent = Vue.extend({
         },
         'change-formtype': function (formType) {
             this.$broadcast('change-formtype',formType);
+        },
+        'change-bill': function (bill) {
+            this.$broadcast('change-bill',bill);
+        },
+        'new-bill': function (bill) {
+            this.$broadcast('new-bill',bill);
         }
     }
 });
