@@ -3,7 +3,7 @@ window.menuComponent = Vue.extend({
         <nav>
             <ul>
                 <li v-for="menu in menus">
-                    <a href="#" @click.prevent="showView(menu.id)">{{menu.name}}</a>
+                    <a v-link="{name: menu.routeName}">{{menu.name}}</a>
                 </li>
             </ul>
         </nav>
@@ -11,8 +11,10 @@ window.menuComponent = Vue.extend({
     data: function () {
         return{
             menus: [
-                {id: 0,name:"Listar Contas"},
-                {id: 1,name:"Criar Conta"}
+                // {id: 0,name:"Listar Contas", url: '/bills'},
+                // {id: 1,name:"Criar Conta", url: '/bill/create'}
+                {id: 0,name:"Listar Contas", routeName: 'bill.list'},
+                {id: 1,name:"Criar Conta", routeName: 'bill.create'}
             ],
         };
     },

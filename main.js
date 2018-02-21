@@ -1,8 +1,9 @@
 var router = new VueRouter();
 
 router.map({
-    '/bills':{component: billListComponent},
-    'bill/create':{component: billCreateComponent}
+    '/bills':{name: 'bill.list', component: billListComponent},
+    'bill/create':{name: 'bill.create',component: billCreateComponent},
+    '*':{component: billListComponent}
 });
 
 router.start({
@@ -10,3 +11,7 @@ router.start({
         'app-component': appComponent
     }
 },'#app');
+
+router.redirect({
+    '*':'/bills'
+});
