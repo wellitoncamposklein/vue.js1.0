@@ -69,7 +69,7 @@ var billListComponent = Vue.extend({
     },
     methods:{
         loadbille: function (bill) {
-            this.bille = bill;
+            this.$root.$children[0].bille = bill;
             this.$root.$children[0].activedView = 1;
             this.$root.$children[0].formType = 'update';
         },
@@ -113,6 +113,54 @@ var menuComponent = Vue.extend({
 
 Vue.component('menu-component',menuComponent);
 
+var billCreateComponent = Vue.extend({
+    template: `
+        <form name="form" @submit.prevent="submit">
+            <label>Vencimento:</label>
+            <input type="text" v-model="bille.date_due"/><br/><br/>
+            <label>Nome:</label>
+            <select v-model="bille.name">
+                <option v-for="o in names" v-model="o">{{ o }}</option>
+            </select><br><br>
+            <label>Valor:</label>
+            <input type="text" v-model="bille.value"/><br><br>
+            <label>Conta paga?</label>
+            <input type="checkbox" v-model="bille.done"/><br><br>
+            <input type="button" @click="submit" value="Enviar"/>
+        </form>
+    `,
+    props:['bille','formType'],
+    data:function () {
+        return{
+            names:[
+                'Conta de Luz',
+                'Conta de água',
+                'Conta de telefone',
+                'Internet',
+                'Gasolina'
+            ]
+        };
+    },
+    methods:{
+        submit: function () {
+            if (this.formType == 'insert'){
+                this.bills.push(this.bille);
+            }
+
+            this.bille = {
+                date_due: '',
+                name:'',
+                value: 0,
+                done: 1
+            };
+
+            this.activedView = 0;
+        }
+    }
+});
+
+Vue.component('bill-create-component',billCreateComponent);
+
 var appComponent = Vue.extend({
     template:`
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -139,19 +187,7 @@ var appComponent = Vue.extend({
             <bill-list-component></bill-list-component>
         </div>
         <div v-if="activedView == 1">
-            <form name="form" @submit.prevent="submit">
-                <label>Vencimento:</label>
-                <input type="text" v-model="bille.date_due"/><br/><br/>
-                <label>Nome:</label>
-                <select v-model="bille.name">
-                    <option v-for="o in names" v-model="o">{{ o }}</option>
-                </select><br><br>
-                <label>Valor:</label>
-                <input type="text" v-model="bille.value"/><br><br>
-                <label>Conta paga?</label>
-                <input type="checkbox" v-model="bille.done"/><br><br>
-                <input type="button" @click="submit" value="Enviar"/>
-            </form>
+            <bill-create-component :bille="bille" :form-type="formType"></bill-create-component>
         </div>
     `,
     data: function(){
@@ -166,13 +202,7 @@ var appComponent = Vue.extend({
                 value: 0,
                 done: 1
             },
-            names:[
-                'Conta de Luz',
-                'Conta de água',
-                'Conta de telefone',
-                'Internet',
-                'Gasolina'
-            ],
+
 
         };
     },
@@ -191,20 +221,7 @@ var appComponent = Vue.extend({
         }
     },
     methods:{
-        submit: function () {
-            if (this.formType == 'insert'){
-                this.bills.push(this.bille);
-            }
 
-            this.bille = {
-                date_due: '',
-                name:'',
-                value: 0,
-                done: 1
-            };
-
-            this.activedView = 0;
-        },
     }
 });
 
