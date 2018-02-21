@@ -52,7 +52,7 @@ var billListComponent = Vue.extend({
                 </td>
                 <td>
                     <a href="#" @click.prevent="loadbille(bill)">Editar</a> |
-                    <a href="#" @click.prevent="deletebille(index)">Excluir</a>
+                    <a href="#" @click.prevent="deletebille(bill)">Excluir</a>
                 </td>
             </tr>
             </tbody>
@@ -73,9 +73,9 @@ var billListComponent = Vue.extend({
             this.$root.$children[0].activedView = 1;
             this.$root.$children[0].formType = 'update';
         },
-        deletebille: function (index) {
+        deletebille: function (bill) {
             if(confirm("Deseja realmente excluir essa conta?")){
-                this.bills.splice(index,1);
+                this.bills.$remove(bill);
             }
         }
     }
@@ -186,7 +186,7 @@ var appComponent = Vue.extend({
             <bill-list-component></bill-list-component>
         </div>
         <div v-show="activedView == 1">
-            <bill-create-component :bille="bille" :form-type="formType"></bill-create-component>
+            <bill-create-component :bille.sync="bille" :form-type="formType"></bill-create-component>
         </div>
     `,
     data: function(){
