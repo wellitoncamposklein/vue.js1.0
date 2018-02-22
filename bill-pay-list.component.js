@@ -2,7 +2,7 @@
 * ($parent) para acessar de componentes filhos para os pais
 * $root.$children[0 -> posicao dos filhos]) || ||  ||  ||  ||  ||
 * */
-window.billListComponent = Vue.extend({
+window.billPayListComponent = Vue.extend({
     template:`
         <style type="text/css">
             .pago{
@@ -39,12 +39,12 @@ window.billListComponent = Vue.extend({
         </table>
     `,
     data: function () {
-        return{bills: this.$root.$children[0].bills};
+        return{bills: this.$root.$children[0].billspay};
     },
     methods:{
         deletebille: function (bill) {
             if(confirm("Deseja realmente excluir essa conta?")){
-                this.$root.$children[0].bills.$remove(bill);
+                this.$root.$children[0].billspay.$remove(bill);
             }
         }
     }

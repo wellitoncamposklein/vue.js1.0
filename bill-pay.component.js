@@ -1,9 +1,8 @@
-window.appComponent = Vue.extend({
+window.billPayComponent = Vue.extend({
     components: {
-        'menu-component':menuComponent
+        'menu-component':billPayMenuComponent
     },
-    template:`
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    template:`      
         <style type="text/css">         
             .green{
                 color: green;
@@ -32,7 +31,7 @@ window.appComponent = Vue.extend({
     },
     computed:{
         status: function () {
-            var bills = this.$root.$children[0].bills;
+            var bills = this.$root.$children[0].billspay;
             if (!bills.length){
                 return false;
             }
