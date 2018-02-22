@@ -1,8 +1,6 @@
 window.appComponent = Vue.extend({
     components: {
-        'menu-component':menuComponent,
-        'bill-list-component':billListComponent,
-        'bill-create-component':billCreateComponent
+        'menu-component':menuComponent
     },
     template:`
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -45,12 +43,6 @@ window.appComponent = Vue.extend({
                 }
             }
             return count;
-        }
-    },
-    methods:{},
-    events:{
-        'change-bill': function (bill) {
-            this.$broadcast('change-bill',bill);
         }
     }
 });

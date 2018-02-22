@@ -19,6 +19,7 @@ var mainComponent = Vue.extend({
 router.map({
     '/bills':{name: 'bill.list', component: billListComponent},
     'bill/create':{name: 'bill.create',component: billCreateComponent},
+    'bill/:index/update':{name: 'bill.update',component: billCreateComponent},
     '*':{component: billListComponent}
 });
 

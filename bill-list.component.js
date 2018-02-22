@@ -23,7 +23,7 @@ window.billListComponent = Vue.extend({
             </tr>
             </thead>
             <tbody>
-            <tr v-for="bill in bills">
+            <tr v-for="(index,bill) in bills">
                 <td>{{bill.date_due}}</td>
                 <td>{{bill.name}}</td>
                 <td>{{bill.value | currency 'R$ ' 2}}</td>
@@ -31,7 +31,7 @@ window.billListComponent = Vue.extend({
                     {{bill.done | doneLabel}}
                 </td>
                 <td>
-                    <a href="#" @click.prevent="loadbille(bill)">Editar</a> |
+                    <a v-link="{name: 'bill.update', params: {index: index}}">Editar</a> |
                     <a href="#" @click.prevent="deletebille(bill)">Excluir</a>
                 </td>
             </tr>
@@ -39,18 +39,12 @@ window.billListComponent = Vue.extend({
         </table>
     `,
     data: function () {
-        return{
-            bills: this.$root.$children[0].bills
-        };
+        return{bills: this.$root.$children[0].bills};
     },
     methods:{
-        loadbille: function (bill) {
-            //this.$root.$children[0].bille = bill;
-            this.$dispatch('change-bill',bill);
-        },
         deletebille: function (bill) {
             if(confirm("Deseja realmente excluir essa conta?")){
-                this.bills.$remove(bill);
+                this.$root.$children[0].bills.$remove(bill);
             }
         }
     }
