@@ -2,13 +2,13 @@ window.billCreateComponent = Vue.extend({
     template: `
         <form name="form" @submit.prevent="submit">
             <label>Vencimento:</label>
-            <input type="text" v-model="bille.date_due"/><br/><br/>
+            <input type="date" v-model="bille.date_due"/><br/><br/>
             <label>Nome:</label>
             <select v-model="bille.name">
                 <option v-for="o in names" v-model="o">{{ o }}</option>
             </select><br><br>
             <label>Valor:</label>
-            <input type="text" v-model="bille.value"/><br><br>
+            <input type="number" v-model="bille.value"/><br><br>
             <label>Conta paga?</label>
             <input type="checkbox" v-model="bille.done"/><br><br>
             <input type="button" @click="submit" value="Enviar"/>

@@ -32,13 +32,13 @@ window.appComponent = Vue.extend({
     },
     computed:{
         status: function () {
-            var billListComponent = this.$refs.billListComponent;
-            if (!billListComponent.bills.length){
+            var bills = this.$root.$children[0].bills;
+            if (!bills.length){
                 return false;
             }
             var count = 0;
-            for (var i in billListComponent.bills){
-                if (!billListComponent.bills[i].done){
+            for (var i in bills){
+                if (!bills[i].done){
                     count++;
                 }
             }

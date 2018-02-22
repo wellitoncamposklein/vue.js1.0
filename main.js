@@ -8,9 +8,9 @@ var mainComponent = Vue.extend({
     data: function () {
         return {
             bills: [
-                {date_due: '20/08/2017', name:'Conta de luz',value: '70.99', done:1},
-                {date_due: '10/08/2017', name:'Conta de agua',value: '95.99', done:0},
-                {date_due: '10/08/2017', name:'Internet',value: '200.99', done:0}
+                {date_due: '2017-08-20', name:'Conta de luz',value: '70.99', done:1},
+                {date_due: '2017-08-10', name:'Conta de agua',value: '95.99', done:0},
+                {date_due: '2017-08-10', name:'Internet',value: '200.99', done:0}
             ]
         };
     }
