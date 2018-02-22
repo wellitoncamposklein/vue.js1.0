@@ -31,7 +31,7 @@ window.billPayListComponent = Vue.extend({
                     {{bill.done | doneLabel}}
                 </td>
                 <td>
-                    <a v-link="{name: 'bill.update', params: {index: index}}">Editar</a> |
+                    <a v-link="{name: 'bill-pay.update', params: {index: index}}">Editar</a> |
                     <a href="#" @click.prevent="deletebille(bill)">Excluir</a>
                 </td>
             </tr>

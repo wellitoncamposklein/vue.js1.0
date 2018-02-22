@@ -33,14 +33,14 @@ window.billPayCreateComponent = Vue.extend({
         };
     },
     created: function(){
-        if (this.$route.name = 'bill.update'){
+        if (this.$route.name = 'bill-pay.update'){
             this.formType = 'update';
             this.getBill(this.$route.params.index);
         }
     },
     methods:{
         submit: function () {
-            if (this.$route.name == 'bill.create'){
+            if (this.$route.name == 'bill-pay.create'){
                 this.$root.$children[0].billspay.push(this.bille);
             }
 
@@ -50,7 +50,7 @@ window.billPayCreateComponent = Vue.extend({
                 value: 0,
                 done: 1
             };
-            this.$router.go({name: 'bill.list'});
+            this.$router.go({name: 'bill-pay.list'});
         },
         getBill: function (index) {
             var bills = this.$root.$children[0].billspay;
