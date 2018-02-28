@@ -2,18 +2,21 @@ window.billPayCreateComponent = Vue.extend({
     template: `
         <form name="form" @submit.prevent="submit">
             <label>Vencimento:</label>
-            <input type="date" v-model="bille.date_due"/><br/><br/>
+            <input type="text" v-model="bille.date_due"/><br/><br/>
             <label>Nome:</label>
             <select v-model="bille.name">
                 <option v-for="o in names" v-model="o">{{ o }}</option>
             </select><br><br>
             <label>Valor:</label>
-            <input type="number" v-model="bille.value"/><br><br>
+            <input type="text" v-model="bille.value"/><br><br>
             <label>Conta paga?</label>
             <input type="checkbox" v-model="bille.done"/><br><br>
             <input type="button" @click="submit" value="Enviar"/>
         </form>
     `,
+    http:{
+        root: 'http://192.168.10.11/api/v2'
+    },
     data:function () {
         return{
             formType:'insert',
@@ -33,28 +36,35 @@ window.billPayCreateComponent = Vue.extend({
         };
     },
     created: function(){
-        if (this.$route.name = 'bill-pay.update'){
+        if (this.$route.name == 'bill-pay.update'){
             this.formType = 'update';
-            this.getBill(this.$route.params.index);
+            this.getBill(this.$route.params.id);
         }
     },
     methods:{
         submit: function () {
-            if (this.$route.name == 'bill-pay.create'){
-                this.$root.$children[0].billspay.push(this.bille);
+            if (this.formType == 'insert'){
+                this.$http.post('bills',this.bille).then(function(response) {
+                    this.$router.go({name: 'bill-pay.list'});
+                });
+            }else{
+                this.$http.put('bills/'+this.bille.id,this.bille).then(function(response) {
+                    this.$router.go({name: 'bill-pay.list'});
+                });
             }
 
-            this.bille = {
-                date_due: '',
-                name:'',
-                value: 0,
-                done: 1
-            };
-            this.$router.go({name: 'bill-pay.list'});
+            // this.bille = {
+            //     date_due: '',
+            //     name:'',
+            //     value: 0,
+            //     done: 1
+            // };
+            // this.$router.go({name: 'bill-pay.list'});
         },
-        getBill: function (index) {
-            var bills = this.$root.$children[0].billspay;
-            this.bille =  bills[index];
+        getBill: function (id) {
+            this.$http.get('bills/'+id).then(function(response) {
+                this.bille = response.data;
+            });
         }
     }
 });

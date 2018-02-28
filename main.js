@@ -20,7 +20,7 @@ router.map({
         subRoutes:{
             '/':{name: 'bill-pay.list', component: billPayListComponent},
             '/create':{name: 'bill-pay.create',component: billPayCreateComponent},
-            '/:index/update':{name: 'bill-pay.update',component: billPayCreateComponent},
+            '/:id/update':{name: 'bill-pay.update',component: billPayCreateComponent},
             '*':{component: billPayComponent}
         }
     },
@@ -32,5 +32,5 @@ router.start({
 },'#app');
 
 router.redirect({
-    '*':'/bill-payss'
+    '*':'/'
 });
