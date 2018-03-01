@@ -24,9 +24,6 @@ window.billPayComponent = Vue.extend({
         <menu-component></menu-component>
         <router-view></router-view>
     `,
-    http:{
-        root: 'http://192.168.10.11/api/v2'
-    },
     data: function(){
         return {
             title: "Contas a Pagar",
@@ -51,9 +48,8 @@ window.billPayComponent = Vue.extend({
             this.status = count;
         },
         updateStatus: function () {
-            var resource = this.$resource('bills{/id}');
-            resource.query().then(function(response) {this.calculateStatus(response.data);});
-            // this.$http.get('bills').then(function(response) {this.calculateStatus(response.data);});
+            var self = this;
+            Bill.query().then(function(response) {self.calculateStatus(response.data);});
         }
     },
     events:{
