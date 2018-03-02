@@ -27,7 +27,7 @@ window.billReceiveListComponent = Vue.extend({
                 <td>{{bill.date_due}}</td>
                 <td>{{bill.name}}</td>
                 <td>{{bill.value | currency 'R$ ' 2}}</td>
-                <td class="minha-classe" :class="{'nao-pago': bill.done === 0,'pago': bill.done === 1}">
+                <td :class="{'nao-pago': bill.done === 0,'pago': bill.done === 1}">
                     {{bill.done | doneLabel1}}
                 </td>
                 <td>
