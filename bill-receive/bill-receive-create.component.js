@@ -1,4 +1,4 @@
-window.billPayCreateComponent = Vue.extend({
+window.billReceiveCreateComponent = Vue.extend({
     template: `
         <form name="form" @submit.prevent="submit">
             <label>Vencimento:</label>
@@ -9,7 +9,7 @@ window.billPayCreateComponent = Vue.extend({
             </select><br><br>
             <label>Valor:</label>
             <input type="text" v-model="bille.value" class="form-control"/><br><br>
-            <label>Conta paga?</label>
+            <label>Conta recebida?</label>
             <input type="checkbox" v-model="bille.done"/><br><br>
             <!--<input type="button" @click="submit" value="Enviar"/>-->
             <button type="button" class="btn btn-primary" @click="submit">Enviar</button>
@@ -34,7 +34,7 @@ window.billPayCreateComponent = Vue.extend({
         };
     },
     created: function(){
-        if (this.$route.name == 'bill-pay.update'){
+        if (this.$route.name == 'bill-receive.update'){
             this.formType = 'update';
             this.getBill(this.$route.params.id);
         }
@@ -43,21 +43,21 @@ window.billPayCreateComponent = Vue.extend({
         submit: function () {
             if (this.formType == 'insert'){
                 var self = this;
-                Bill.save({},this.bille).then(function(response) {
+                Receive.save({},this.bille).then(function(response) {
                     self.$dispatch('change-info');
-                    self.$router.go({name: 'bill-pay.list'});
+                    self.$router.go({name: 'bill-receive.list'});
                 });
             }else{
                 var self = this;
-                Bill.update({id: this.bille.id},this.bille).then(function(response) {
+                Receive.update({id: this.bille.id},this.bille).then(function(response) {
                     self.$dispatch('change-info');
-                    self.$router.go({name: 'bill-pay.list'});
+                    self.$router.go({name: 'bill-receive.list'});
                 });
             }
         },
         getBill: function (id) {
             var self = this;
-            Bill.get({id: id}).then(function(response) {
+            Receive.get({id: id}).then(function(response) {
                 self.bille = response.data;
             });
         }

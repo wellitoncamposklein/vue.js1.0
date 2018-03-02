@@ -2,7 +2,7 @@
 * ($parent) para acessar de componentes filhos para os pais
 * $root.$children[0 -> posicao dos filhos]) || ||  ||  ||  ||  ||
 * */
-window.billPayListComponent = Vue.extend({
+window.billReceiveListComponent = Vue.extend({
     template:`
         <style type="text/css">
             .pago{
@@ -15,11 +15,11 @@ window.billPayListComponent = Vue.extend({
         <table class="table table-striped table-dark">
             <thead>
             <tr>
-                <th>Vencimento</th>
+                <th>Previsão</th>
                 <th>Nome</th>
                 <th>Valor</th>
-                <th>Paga?</th>
-                <th>Acoes</th>
+                <th>Recebido?</th>
+                <th>Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -28,7 +28,7 @@ window.billPayListComponent = Vue.extend({
                 <td>{{bill.name}}</td>
                 <td>{{bill.value | currency 'R$ ' 2}}</td>
                 <td class="minha-classe" :class="{'nao-pago': bill.done === 0,'pago': bill.done === 1}">
-                    {{bill.done | doneLabel}}
+                    {{bill.done | doneLabel1}}
                 </td>
                 <td>
                     <a v-link="{name: 'bill-receive.update', params: {id: bill.id}}">Editar</a> | 
@@ -45,13 +45,13 @@ window.billPayListComponent = Vue.extend({
     },
     created: function() {
         var self = this;
-        Bill.query().then(function(response) {self.bills = response.data;});
+        Receive.query().then(function(response) {self.bills = response.data;});
     },
     methods:{
         deletebille: function (bille) {
             if(confirm("Deseja realmente excluir essa conta?")){
                 var self = this;
-                Bill.delete({id: bille.id}).then(function(response) {
+                Receive.delete({id: bille.id}).then(function(response) {
                     self.bills.$remove(bille);
                     self.$dispatch('change-info');
                 });
