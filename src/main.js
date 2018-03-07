@@ -1,4 +1,10 @@
-var router = new VueRouter();
+/*
+* let -> escopo e contexto local - variavel com ciclo de vida menor - em estrutura de repeticao
+* const -> declarar um valor que vai ser apenas para leitura
+* var -> escopo e contexto global
+* */
+
+let router = new VueRouter();
 
 var mainComponent = Vue.extend({
     components:{'bill-component': billComponent},

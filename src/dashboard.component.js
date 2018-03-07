@@ -7,25 +7,25 @@ window.dashboardComponent = Vue.extend({
             <h5>{{ totalRecebido | currency 'Total a Receber R$ ' 2 }}</h5>
         </div>
     `,
-    data: function () {
+    data () {
         return{
             totalPago: 0,
             totalRecebido: 0
         };
     },
-    created: function () {
+    created () {
         this.updateTotal();
         this.updateTotal1();
     },
     methods:{
-        updateTotal: function () {
-            var self = this;
+        updateTotal () {
+            let self = this;
             Bill.totals().then(function(response) {
                 self.totalPago = response.data;
             });
         },
-        updateTotal1: function () {
-            var self = this;
+        updateTotal1 () {
+            let self = this;
             Receive.totals().then(function(response) {
                 self.totalRecebido = response.data;
             });
