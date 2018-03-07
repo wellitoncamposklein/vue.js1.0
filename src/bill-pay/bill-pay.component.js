@@ -50,10 +50,10 @@ window.billPayComponent = Vue.extend({
             this.status = count;
         },
         updateStatus() {
-            Bill.query().then((response) => {this.calculateStatus(response.data);});
+            Bills.query().then((response) => {this.calculateStatus(response.data);});
         },
         updateTotal() {
-            Bill.totals().then((response) => {this.total = response.data;});
+            Bills.totals().then((response) => {this.total = response.data;});
         }
     },
     events:{

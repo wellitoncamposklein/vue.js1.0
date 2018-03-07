@@ -14,7 +14,7 @@ window.billPayListComponent = Vue.extend({
     created: function created() {
         var _this = this;
 
-        Bill.query().then(function (response) {
+        Bills.query().then(function (response) {
             _this.bills = response.data;
         });
     },
@@ -24,7 +24,7 @@ window.billPayListComponent = Vue.extend({
             var _this2 = this;
 
             if (confirm("Deseja realmente excluir essa conta?")) {
-                Bill.delete({ id: bille.id }).then(function (response) {
+                Bills.delete({ id: bille.id }).then(function (response) {
                     _this2.bills.$remove(bille);
                     _this2.$dispatch('change-info');
                 });

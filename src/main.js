@@ -83,13 +83,3 @@ class BillPay extends Bill{
         console.log(this._pago);
     }
 }
-
-let bill = new BillPay(1, "Fokushima",false);
-
-console.log(bill);
-bill.id = 1000;
-bill.name = "Fatura de cartão";
-// console.log(bill.id);
-// console.log(bill.name);
-// console.log(bill.pago);
-bill.showVariables();

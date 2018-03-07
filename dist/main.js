@@ -128,13 +128,3 @@ var BillPay = function (_Bill) {
 
     return BillPay;
 }(Bill);
-
-var bill = new BillPay(1, "Fokushima", false);
-
-console.log(bill);
-bill.id = 1000;
-bill.name = "Fatura de cartão";
-// console.log(bill.id);
-// console.log(bill.name);
-// console.log(bill.pago);
-bill.showVariables();

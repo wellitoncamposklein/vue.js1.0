@@ -69,7 +69,7 @@ Vue.filter('dateFormat', {
                 var dateRegex = value.match(/\d{4}\-\d{2}\-\d{2}/g);
                 var dateString = dateRegex ? dateRegex[0] : dateRegex;
                 if (dateString) {
-                    value = new Date(dateString + "T03:00:00");
+                    value = new Date(dateString);
                 } else {
                     return value;
                 }
@@ -78,21 +78,20 @@ Vue.filter('dateFormat', {
             // return new Intl.DateTimeFormat('pt-BR').format(value).split(' ')[0];
         }
         return value;
-    },
-    write: function write(value) {
-        //pegar o valor da view e converter para armazenar no modelo
-        var dateRegex = value.match(/\d{2}\/\d{2}\/\d{4}/g);
-        if (dateRegex) {
-            var dateString = dateRegex[0];
-            var date = new Date(dateString.split('/').reverse().join('-'));
-
-            if (!isNaN(date.getTime())) {
-                return date;
-            }
-        }
-        return value;
     }
-});
+}
+/*write(value){//pegar o valor da view e converter para armazenar no modelo
+    let dateRegex = value.match(/\d{2}\/\d{2}\/\d{4}/g);
+    if (dateRegex){
+        let dateString = dateRegex[0];
+        let date = new Date(dateString.split('/').reverse().join('-'));
+         if (!isNaN(date.getTime())){
+            return date;
+        }
+    }
+    return value;
+}*/
+);
 
 /*Vue.filter('doneLabel',function (value) {
     if (value == 0){

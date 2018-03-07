@@ -10,7 +10,7 @@ window.billPayCreateComponent = Vue.extend({
     template: `
         <form name="form" @submit.prevent="submit">
             <label>Vencimento:</label>
-            <input type="text" v-model="bille.date_due | dateFormat" class="form-control"/><br/><br/>
+            <input type="date" v-model="bille.date_due | dateFormat" class="form-control"/><br/><br/>
             <label>Nome:</label>
             <select v-model="bille.name" class="form-control">
                 <option v-for="o in names" v-model="o">{{ o }}</option>
@@ -27,12 +27,7 @@ window.billPayCreateComponent = Vue.extend({
         return{
             formType:'insert',
             names:names,
-            bille: {
-                date_due: '',
-                name:'',
-                value: 0,
-                done: 1
-            },
+            bille: new BillPay()
         };
     },
     created(){
@@ -43,20 +38,22 @@ window.billPayCreateComponent = Vue.extend({
     },
     methods:{
         submit() {
+            let data = JSON.stringify(this.bille);//this.bille.toJSON();
+            let self = this
             if (this.formType == 'insert'){
-                Bill.save({},this.bille).then((response) => {
-                    this.$dispatch('change-info');
-                    this.$router.go({name: 'bill-pay.list'});
+                Bills.save({},data).then((response) => {
+                    self.$dispatch('change-info');
+                    self.$router.go({name: 'bill-pay.list'});
                 });
             }else{
-                Bill.update({id: this.bille.id},this.bille).then((response) => {
-                    this.$dispatch('change-info');
-                    this.$router.go({name: 'bill-pay.list'});
+                Bills.update({id: this.bille.id},data).then((response) => {
+                    self.$dispatch('change-info');
+                    self.$router.go({name: 'bill-pay.list'});
                 });
             }
         },
         getBill (id) {
-            Bill.get({id: id}).then((response) => {this.bille = response.data;});
+            Bills.get({id: id}).then((response) => {this.bille = response.data;});
         }
     }
 });

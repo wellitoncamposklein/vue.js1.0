@@ -44,12 +44,12 @@ window.billPayListComponent = Vue.extend({
         };
     },
     created() {
-        Bill.query().then((response) => {this.bills = response.data;});
+        Bills.query().then((response) => {this.bills = response.data;});
     },
     methods:{
         deletebille (bille) {
             if(confirm("Deseja realmente excluir essa conta?")){
-                Bill.delete({id: bille.id}).then((response) => {
+                Bills.delete({id: bille.id}).then((response) => {
                     this.bills.$remove(bille);
                     this.$dispatch('change-info');
                 });
