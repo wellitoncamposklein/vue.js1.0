@@ -10,13 +10,13 @@ window.billReceiveCreateComponent = Vue.extend({
     template: `
         <form name="form" @submit.prevent="submit">
             <label>Vencimento:</label>
-            <input type="text" v-model="bille.date_due" class="form-control"/><br/><br/>
+            <input type="date" v-model="bille.date_due | dateFormat" class="form-control"/><br/><br/>
             <label>Nome:</label>
-            <select v-model="bille.name" class="form-control">
-                <option v-for="o in names" v-model="o">{{ o }}</option>
+            <select v-model="bille.name | stringToUpperCase" class="form-control">
+                <option v-for="o in names" v-model="o">{{ o | stringToUpperCase}}</option>
             </select><br><br>
             <label>Valor:</label>
-            <input type="text" v-model="bille.value" class="form-control"/><br><br>
+            <input type="text" v-model="bille.value | numberFormat" class="form-control"/><br><br>
             <label>Conta recebida?</label>
             <input type="checkbox" v-model="bille.done"/><br><br>
             <!--<input type="button" @click="submit" value="Enviar"/>-->
@@ -27,12 +27,7 @@ window.billReceiveCreateComponent = Vue.extend({
         return{
             formType:'insert',
             names:names,
-            bille: {
-                date_due: '',
-                name:'',
-                value: 0,
-                done: 1
-            },
+            bille: new BillPay()
         };
     },
     created(){
@@ -43,20 +38,22 @@ window.billReceiveCreateComponent = Vue.extend({
     },
     methods:{
         submit () {
+            let data = JSON.stringify(this.bille);//this.bille.toJSON();
+            let self = this
             if (this.formType == 'insert'){
-                Receive.save({},this.bille).then((response) => {
-                    this.$dispatch('change-info');
-                    this.$router.go({name: 'bill-receive.list'});
+                Receives.created({},data).then((response) => {
+                    self.$dispatch('change-info');
+                    self.$router.go({name: 'bill-receive.list'});
                 });
             }else{
-                Receive.update({id: this.bille.id},this.bille).then((response) => {
-                    this.$dispatch('change-info');
-                    this.$router.go({name: 'bill-receive.list'});
+                Receives.updated({id: this.bille.id},data).then((response) => {
+                    self.$dispatch('change-info');
+                    self.$router.go({name: 'bill-receive.list'});
                 });
             }
         },
         getBill (id) {
-            Receive.get({id: id}).then((response) => {
+            Receives.edit({id: id}).then((response) => {
                 this.bille = response.data;
             });
         }

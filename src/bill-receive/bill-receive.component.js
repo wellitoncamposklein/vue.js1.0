@@ -50,10 +50,10 @@ window.billReceiveComponent = Vue.extend({
             this.status = count;
         },
         updateStatus() {
-            Receive.query().then((response) => {this.calculateStatus(response.data);});
+            Receives.query().then((response) => {this.calculateStatus(response.data);});
         },
         updateTotal() {
-            Receive.totals().then((response) => {this.total = response.data;});
+            Receives.totals().then((response) => {this.total = response.data;});
         }
     },
     events:{

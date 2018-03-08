@@ -49,7 +49,7 @@ router.start({
 router.redirect({
     '*':'/'
 });
-
+/*
 class Bill{
     constructor(id, name){
         this._id = id;
@@ -82,4 +82,4 @@ class BillPay extends Bill{
         super.showVariables();
         console.log(this._pago);
     }
-}
+}*/

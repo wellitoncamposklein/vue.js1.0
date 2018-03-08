@@ -25,9 +25,9 @@ window.billPayListComponent = Vue.extend({
             <tbody>
             <tr v-for="(index,bill) in bills">
                 <td>{{bill.date_due | dateFormat}}</td>
-                <td>{{bill.name}}</td>
-                <td>{{bill.value | numberFormat}}</td>
-                <td :class="{'nao-pago': bill.done === 0,'pago': bill.done === 1}">
+                <td>{{bill.name | stringToUpperCase}}</td>
+                <td>{{bill.value | numberFormat 'pt-BR'}}</td>
+                <td :class="{'nao-pago': bill.done === false,'pago': bill.done === true}">
                     {{bill.done | doneLabel}}
                 </td>
                 <td>
@@ -49,9 +49,10 @@ window.billPayListComponent = Vue.extend({
     methods:{
         deletebille (bille) {
             if(confirm("Deseja realmente excluir essa conta?")){
+                let self = this;
                 Bills.delete({id: bille.id}).then((response) => {
-                    this.bills.$remove(bille);
-                    this.$dispatch('change-info');
+                    self.bills.$remove(bille);
+                    self.$dispatch('change-info');
                 });
             }
         }

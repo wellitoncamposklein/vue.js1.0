@@ -33,19 +33,25 @@ Vue.filter('statusGeneral1', function (value) {
 });
 
 Vue.filter('numberFormat', {
-    read: function read(value) {
+    read: function read(value, language) {
         //mostrar a informacao na viewq
+        var currencyVal = void 0;
+        if (language == 'pt-BR') {
+            currencyVal = 'BRL';
+        } else {
+            currencyVal = 'USD';
+        }
         var number = 0;
         if (value && (typeof value === "undefined" ? "undefined" : _typeof(value)) !== undefined) {
             var numberRegex = value.toString().match(/\d+(\.{1}\d{1,2}){0,1}/g);
             number = numberRegex ? numberRegex[0] : numberRegex;
         }
 
-        var numberFormat = new Intl.NumberFormat('pt-BR', {
+        var numberFormat = new Intl.NumberFormat(language, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             style: 'currency',
-            currency: 'BRL'
+            currency: currencyVal
         });
 
         return numberFormat.format(number);
@@ -58,6 +64,18 @@ Vue.filter('numberFormat', {
             number = isNaN(number) ? 0 : parseFloat(number);
         }
         return number;
+    }
+});
+
+Vue.filter('stringToUpperCase', {
+    read: function read(value) {
+        //mostrar a informacao na viewq
+        if (value) {
+            return value.toUpperCase();
+        }
+    },
+    write: function write(value) {
+        return value;
     }
 });
 
@@ -78,55 +96,18 @@ Vue.filter('dateFormat', {
             // return new Intl.DateTimeFormat('pt-BR').format(value).split(' ')[0];
         }
         return value;
-    }
-}
-/*write(value){//pegar o valor da view e converter para armazenar no modelo
-    let dateRegex = value.match(/\d{2}\/\d{2}\/\d{4}/g);
-    if (dateRegex){
-        let dateString = dateRegex[0];
-        let date = new Date(dateString.split('/').reverse().join('-'));
-         if (!isNaN(date.getTime())){
-            return date;
+    },
+    write: function write(value) {
+        //pegar o valor da view e converter para armazenar no modelo
+        var dateRegex = value.match(/\d{2}\/\d{2}\/\d{4}/g);
+        if (dateRegex) {
+            var dateString = dateRegex[0];
+            var date = new Date(dateString.split('/').reverse().join('-'));
+
+            if (!isNaN(date.getTime())) {
+                return date;
+            }
         }
-    }
-    return value;
-}*/
-);
-
-/*Vue.filter('doneLabel',function (value) {
-    if (value == 0){
-        return "Não Paga"
-    }else{
-        return "Paga"
+        return value;
     }
 });
-
-Vue.filter('statusGeneral',function (value) {
-    if (value === false){
-        return 'Nenhuma conta cadastrada';
-    }
-    if (!value){
-        return 'Nenhuma conta a pagar';
-    }else{
-        return 'Existem '+value+' contas a serem pagas';
-    }
-});
-
-Vue.filter('doneLabel1',function (value) {
-    if (value == 0){
-        return "Não Recebido"
-    }else{
-        return "Recebido"
-    }
-});
-
-Vue.filter('statusGeneral1',function (value) {
-    if (value === false){
-        return 'Nenhuma conta cadastrada';
-    }
-    if (!value){
-        return 'Nenhuma conta a receber';
-    }else{
-        return 'Existem '+value+' contas a serem recebidas';
-    }
-});*/

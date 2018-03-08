@@ -24,10 +24,10 @@ window.billReceiveListComponent = Vue.extend({
             </thead>
             <tbody>
             <tr v-for="(index,bill) in bills">
-                <td>{{bill.date_due}}</td>
-                <td>{{bill.name}}</td>
-                <td>{{bill.value | currency 'R$ ' 2}}</td>
-                <td :class="{'nao-pago': bill.done === 0,'pago': bill.done === 1}">
+                <td>{{bill.date_due | dateFormat}}</td>
+                <td>{{bill.name | stringToUpperCase}}</td>
+                <td>{{bill.value | numberFormat 'pt-BR'}}</td>
+                <td :class="{'nao-pago': bill.done === false,'pago': bill.done === true}">
                     {{bill.done | doneLabel1}}
                 </td>
                 <td>
@@ -44,15 +44,15 @@ window.billReceiveListComponent = Vue.extend({
         };
     },
     created() {
-        Receive.query().then((response) => {this.bills = response.data;});
+        Receives.query().then((response) => {this.bills = response.data;});
     },
     methods:{
         deletebille (bille) {
             if(confirm("Deseja realmente excluir essa conta?")){
                 let self = this;
-                Receive.delete({id: bille.id}).then((response) => {
-                    this.bills.$remove(bille);
-                    this.$dispatch('change-info');
+                Receives.deleted({id: bille.id}).then((response) => {
+                    self.bills.$remove(bille);
+                    self.$dispatch('change-info');
                 });
             }
         }

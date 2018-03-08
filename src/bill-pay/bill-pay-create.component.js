@@ -12,8 +12,8 @@ window.billPayCreateComponent = Vue.extend({
             <label>Vencimento:</label>
             <input type="date" v-model="bille.date_due | dateFormat" class="form-control"/><br/><br/>
             <label>Nome:</label>
-            <select v-model="bille.name" class="form-control">
-                <option v-for="o in names" v-model="o">{{ o }}</option>
+            <select v-model="bille.name | stringToUpperCase" class="form-control">
+                <option v-for="o in names" v-model="o">{{ o | stringToUpperCase}}</option>
             </select><br><br>
             <label>Valor:</label>
             <input type="text" v-model="bille.value | numberFormat" class="form-control"/><br><br>
@@ -53,7 +53,9 @@ window.billPayCreateComponent = Vue.extend({
             }
         },
         getBill (id) {
-            Bills.get({id: id}).then((response) => {this.bille = response.data;});
+            Bills.get({id: id}).then((response) => {
+                this.bille = response.data;
+            });
         }
     }
 });

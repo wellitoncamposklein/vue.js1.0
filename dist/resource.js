@@ -11,6 +11,10 @@ window.Bills = Vue.resource('bills{/id}', {}, {
     totals: { method: 'GET', url: 'bills/total' }
 });
 
-window.Receive = Vue.resource('receives{/id}', {}, {
-    totals: { method: 'GET', url: 'receives/total' }
+window.Receives = Vue.resource('receives{/id}', {}, {
+    totals: { method: 'GET', url: 'receives/total' },
+    edit: { method: 'GET', url: 'receives{/id}/edit' },
+    deleted: { method: 'DELETE', url: 'receives{/id}' },
+    created: { method: 'POST', url: 'receives' },
+    updated: { method: 'PUT', url: 'receives{/id}' }
 });

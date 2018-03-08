@@ -22,7 +22,7 @@ window.dashboardComponent = Vue.extend({
         },
         updateTotal1: function updateTotal1() {
             var self = this;
-            Receive.totals().then(function (response) {
+            Receives.totals().then(function (response) {
                 self.totalRecebido = response.data;
             });
         }

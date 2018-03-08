@@ -25,18 +25,24 @@ Vue.filter('statusGeneral1',(value) => {
 });
 
 Vue.filter('numberFormat',{
-    read(value){//mostrar a informacao na viewq
+    read(value, language){//mostrar a informacao na viewq
+        let currencyVal;
+        if (language == 'pt-BR'){
+            currencyVal = 'BRL';
+        }else{
+            currencyVal = 'USD';
+        }
         let number = 0;
         if (value && typeof value !== undefined){
             let numberRegex = value.toString().match(/\d+(\.{1}\d{1,2}){0,1}/g);
             number = numberRegex ? numberRegex[0] : numberRegex;
         }
 
-        let numberFormat = new Intl.NumberFormat('pt-BR',{
+        let numberFormat = new Intl.NumberFormat(language,{
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             style: 'currency',
-            currency: 'BRL'
+            currency: currencyVal
         });
 
         return numberFormat.format(number);
@@ -49,6 +55,15 @@ Vue.filter('numberFormat',{
         }
         return number;
     }
+});
+
+Vue.filter('stringToUpperCase',{
+    read(value){//mostrar a informacao na viewq
+        if (value){
+            return value.toUpperCase();
+        }
+    },
+    write(value){return value}
 });
 
 Vue.filter('dateFormat',{
@@ -68,7 +83,7 @@ Vue.filter('dateFormat',{
         }
         return value;
     },
-    /*write(value){//pegar o valor da view e converter para armazenar no modelo
+    write(value){//pegar o valor da view e converter para armazenar no modelo
         let dateRegex = value.match(/\d{2}\/\d{2}\/\d{4}/g);
         if (dateRegex){
             let dateString = dateRegex[0];
@@ -79,43 +94,5 @@ Vue.filter('dateFormat',{
             }
         }
         return value;
-    }*/
-});
-
-/*Vue.filter('doneLabel',function (value) {
-    if (value == 0){
-        return "Não Paga"
-    }else{
-        return "Paga"
     }
 });
-
-Vue.filter('statusGeneral',function (value) {
-    if (value === false){
-        return 'Nenhuma conta cadastrada';
-    }
-    if (!value){
-        return 'Nenhuma conta a pagar';
-    }else{
-        return 'Existem '+value+' contas a serem pagas';
-    }
-});
-
-Vue.filter('doneLabel1',function (value) {
-    if (value == 0){
-        return "Não Recebido"
-    }else{
-        return "Recebido"
-    }
-});
-
-Vue.filter('statusGeneral1',function (value) {
-    if (value === false){
-        return 'Nenhuma conta cadastrada';
-    }
-    if (!value){
-        return 'Nenhuma conta a receber';
-    }else{
-        return 'Existem '+value+' contas a serem recebidas';
-    }
-});*/

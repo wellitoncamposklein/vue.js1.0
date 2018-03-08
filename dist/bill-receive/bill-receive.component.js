@@ -33,14 +33,14 @@ window.billReceiveComponent = Vue.extend({
         updateStatus: function updateStatus() {
             var _this = this;
 
-            Receive.query().then(function (response) {
+            Receives.query().then(function (response) {
                 _this.calculateStatus(response.data);
             });
         },
         updateTotal: function updateTotal() {
             var _this2 = this;
 
-            Receive.totals().then(function (response) {
+            Receives.totals().then(function (response) {
                 _this2.total = response.data;
             });
         }
