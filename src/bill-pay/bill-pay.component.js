@@ -24,14 +24,13 @@ window.billPayComponent = Vue.extend({
                     {{ status | statusGeneral}}
                 </h5>        
                 <div class="row">
-                    <div class="col s3">
+                    <div class="col s3 offset-s8 z-depth-1">
                         <h5>{{ total | numberFormat 'pt-BR'}}</h5>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <menu-component></menu-component>           
+        <div class="container">                     
             <router-view></router-view>
         </div>     
     `,

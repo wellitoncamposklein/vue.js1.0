@@ -23,11 +23,14 @@ window.billReceiveComponent = Vue.extend({
                 <h5 :class="{'gray': status === false, 'green': status === 0, 'red': status > 0}">
                     {{ status | statusGeneral1}}
                 </h5>        
-                <h5>{{ total | currency 'Total de R$ ' 2 }}</h5>
+                <div class="row">
+                    <div class="col s3 offset-s8 z-depth-1">
+                        <h5>{{ total | numberFormat 'pt-BR'}}</h5>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="container">
-            <menu-component></menu-component>        
+        <div class="container">                  
             <router-view></router-view>
         </div>
     `,

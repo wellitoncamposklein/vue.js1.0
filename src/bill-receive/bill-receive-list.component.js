@@ -12,7 +12,7 @@ window.billReceiveListComponent = Vue.extend({
                 color: red;
             }
         </style>
-        <table class="table table-striped table-dark">
+        <table class="table table-striped table-dark z-depth-5">
             <thead>
             <tr>
                 <th>Previsão</th>
