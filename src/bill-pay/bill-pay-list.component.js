@@ -13,8 +13,8 @@ window.billPayListComponent = Vue.extend({
             }
         </style>
         <div class="row">
-        <div class="col s12 m12 l12">
-                <table class="table table-striped table-dark">
+            <div class="col s12 m12 l12">
+                <table class="striped responsive-table">
                     <thead>
                     <tr>
                         <th>Vencimento</th>
