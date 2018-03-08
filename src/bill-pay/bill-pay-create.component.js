@@ -12,7 +12,7 @@ window.billPayCreateComponent = Vue.extend({
             <label>Vencimento:</label>
             <input type="date" v-model="bille.date_due | dateFormat" class="form-control"/><br/><br/>
             <label>Nome:</label>
-            <select v-model="bille.name | stringToUpperCase" class="form-control">
+            <select v-model="bille.name | stringToUpperCase">
                 <option v-for="o in names" v-model="o">{{ o | stringToUpperCase}}</option>
             </select><br><br>
             <label>Valor:</label>
