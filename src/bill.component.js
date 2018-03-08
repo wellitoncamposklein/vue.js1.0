@@ -6,10 +6,8 @@ window.billComponent = Vue.extend({
                     <a v-link="{name: menu.routeName}">{{menu.name}}</a>
                 </li>
             </ul>
-        </nav>
-        <div class="container">
-            <router-view></router-view>
-        </div>
+        </nav>        
+        <router-view></router-view>
     `,
     data() {
         return{
