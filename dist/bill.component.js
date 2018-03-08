@@ -1,7 +1,7 @@
 "use strict";
 
 window.billComponent = Vue.extend({
-    template: "\n        <nav>\n            <ul>\n                <li v-for=\"menu in menus\">\n                    <a v-link=\"{name: menu.routeName}\">{{menu.name}}</a>\n                </li>\n            </ul>\n        </nav>\n        <router-view></router-view>\n    ",
+    template: "\n        <nav>\n            <ul>\n                <li v-for=\"menu in menus\">\n                    <a v-link=\"{name: menu.routeName}\">{{menu.name}}</a>\n                </li>\n            </ul>\n        </nav>\n        <div class=\"container\">\n            <router-view></router-view>\n        </div>\n    ",
     data: function data() {
         return {
             menus: [

@@ -7,7 +7,9 @@ window.billComponent = Vue.extend({
                 </li>
             </ul>
         </nav>
-        <router-view></router-view>
+        <div class="container">
+            <router-view></router-view>
+        </div>
     `,
     data() {
         return{
