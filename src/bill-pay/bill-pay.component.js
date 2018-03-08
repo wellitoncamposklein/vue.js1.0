@@ -24,7 +24,7 @@ window.billPayComponent = Vue.extend({
                     {{ status | statusGeneral}}
                 </h5>        
                 <div class="row">
-                    <div class="col s3 offset-s8 z-depth-1">
+                    <div class="col s3 offset-s8 z-depth-1 deep-purple accent-1">
                         <h5>{{ total | numberFormat 'pt-BR'}}</h5>
                     </div>
                 </div>
