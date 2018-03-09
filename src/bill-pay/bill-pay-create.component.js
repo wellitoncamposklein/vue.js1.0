@@ -23,11 +23,11 @@ window.billPayCreateComponent = Vue.extend({
             <!--<button type="button" class="btn btn-primary" @click="submit">Enviar</button>-->
             <div class="row">
                 <div class="col s2">
-                    <a href="#" @click="submit" class="waves-effect waves-light btn-large">
+                    <a href="#" @click="submit" class="waves-effect waves-light btn-large green darken-3 white-text">
                         <i class="material-icons right">save</i>Salvar
                     </a> 
                 </div>   
-                <a v-link="{name: 'bill-pay.list'}" class="waves-effect waves-light btn-large">
+                <a v-link="{name: 'bill-pay.list'}" class="waves-effect waves-light btn-large red white-text">
                     <i class="material-icons right">cancel</i>Cancelar
                 </a>    
             </div>
