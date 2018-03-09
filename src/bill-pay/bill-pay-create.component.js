@@ -9,7 +9,7 @@ const names = [
 window.billPayCreateComponent = Vue.extend({
     template: `
         <div class="container">
-            <div class="row">                
+            <div class="row">                                                
                 <form name="form" @submit.prevent="submit" class="black-text">
                     <div class="row">
                         <div class="col s8">
@@ -31,13 +31,13 @@ window.billPayCreateComponent = Vue.extend({
                     <div class="row">
                         <div class="col s8">
                             <label class="deep-purple-text darken-1s">Valor:</label>
-                            <input type="text" v-model="bille.value | numberFormat" class="form-control"/>
+                            <input type="text" v-model="bille.value | numberFormat 'pt-BR'" class="form-control"/>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col s8">                            
-                            <input type="checkbox" class="filled-in" v-model="bille.done" id="pago" id="pago"/>
+                            <input type="checkbox" class="filled-in" v-model="bille.done" id="pago"/>
                             <label class="deep-purple-text darken-1s" for="pago">Conta paga?</label>
                         </div>
                     </div>

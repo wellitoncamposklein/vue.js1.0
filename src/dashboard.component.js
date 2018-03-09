@@ -1,13 +1,33 @@
 window.dashboardComponent = Vue.extend({
     template: `
-        <div class="container">
-            <div class="row">
-                <div class="row align-items-center justify-content-center text-danger">
-                    <h5 class="red-text">{{ totalPago | currency 'Total a Pagar R$ ' 2 }}</h5>            
-                </div>
-                <div class="row align-items-center justify-content-center text-success">
-                    <h5 class="green-text">{{ totalRecebido | currency 'Total a Receber R$ ' 2 }}</h5>
-                </div>
+        <div class="section">
+            <div class="container"> 
+                <div class="row"> 
+                    <div class="col s6">
+                        <a href="#" v-link="{name: 'bill-pay.list'}">
+                            <div class="card z-depth-2 red">
+                                <div class="card-content white-text">
+                                    <p class="card-title">
+                                        <i class="material-icons">sentiment_very_dissatisfied</i>
+                                    </p>
+                                    <h5>Total a Pagar {{ totalPago | numberFormat 'pt-BR' }}</h5>
+                                </div>
+                            </div>
+                        </a>                                            
+                    </div>
+                    <div class="col s6">
+                        <a href="#" v-link="{name: 'bill-receive.list'}">
+                            <div class="card z-depth-2 green">
+                                <div class="card-content white-text">
+                                    <p class="card-title">
+                                        <i class="material-icons">sentiment_very_satisfied</i>
+                                    </p>
+                                    <h5>Total a Receber {{ totalRecebido | numberFormat 'pt-BR' }}</h5>
+                                </div>
+                            </div>
+                        </a>                                            
+                    </div> 
+                </div>                        
             </div>
         </div>
     `,

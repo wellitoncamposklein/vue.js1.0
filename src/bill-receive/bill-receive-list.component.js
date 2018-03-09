@@ -26,7 +26,7 @@ window.billReceiveListComponent = Vue.extend({
             <tr v-for="(index,bill) in bills">
                 <td>{{bill.date_due | dateFormat}}</td>
                 <td>{{bill.name | stringToUpperCase}}</td>
-                <td>{{bill.value | numberFormat 'pt-BR'}}</td>
+                <td>{{bill.value | numberFormat moneyFormat}}</td>
                 <td :class="{'nao-pago': bill.done === false,'pago': bill.done === true}">
                     {{bill.done | doneLabel1}}
                 </td>
@@ -44,7 +44,8 @@ window.billReceiveListComponent = Vue.extend({
     `,
     data () {
         return{
-            bills:[]
+            bills:[],
+            moneyFormat: 'pt-BR'
         };
     },
     created() {

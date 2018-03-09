@@ -8,7 +8,7 @@ Vue.filter('statusGeneral',(value) => {
     if (!value){
         return 'Nenhuma conta a pagar';
     }else{
-        return 'Existem '+value+' contas a serem pagas';
+        return value+' contas a pagar';
     }
 });
 
@@ -20,7 +20,7 @@ Vue.filter('statusGeneral1',(value) => {
     if (!value){
         return 'Nenhuma conta a receber';
     }else{
-        return 'Existem '+value+' contas a serem recebidas';
+        return value+' contas a receber';
     }
 });
 

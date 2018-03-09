@@ -47,37 +47,3 @@ router.start({
 router.redirect({
     '*': '/'
 });
-/*
-class Bill{
-    constructor(id, name){
-        this._id = id;
-        this._name = name;
-    }
-
-    showVariables(texto = 'nenhum texto'){
-        console.log(this.id);
-        console.log(this.name);
-        console.log(texto);
-    }
-
-    get id(){return this._id};
-    get name(){return this._name};
-
-    set id(id){return this._id = id};
-    set name(name){return this._name = name};
-}
-
-class BillPay extends Bill{
-    constructor(id,name,pago){
-        super(id,name)
-        this._pago = pago;
-    }
-
-    get pago(){return this._pago};
-    set pago(pago){return this._pago = pago};
-
-    showVariables(texto = 'nenhum texto'){
-        super.showVariables();
-        console.log(this._pago);
-    }
-}*/
