@@ -8,30 +8,56 @@ const names = [
 
 window.billPayCreateComponent = Vue.extend({
     template: `
-        <form name="form" @submit.prevent="submit">
-            <label>Vencimento:</label>
-            <input type="date" v-model="bille.date_due | dateFormat" class="form-control"/><br/><br/>
-            <label>Nome:</label>
-            <select v-model="bille.name | stringToUpperCase">
-                <option v-for="o in names" v-model="o">{{ o | stringToUpperCase}}</option>
-            </select><br><br>
-            <label>Valor:</label>
-            <input type="text" v-model="bille.value | numberFormat" class="form-control"/><br><br>
-            <label>Conta paga?</label>
-            <input type="checkbox" v-model="bille.done"/><br><br>
-            <!--<input type="button" @click="submit" value="Enviar"/>-->
-            <!--<button type="button" class="btn btn-primary" @click="submit">Enviar</button>-->
-            <div class="row">
-                <div class="col s2">
-                    <a href="#" @click="submit" class="waves-effect waves-light btn-large green darken-3 white-text">
-                        <i class="material-icons right">save</i>Salvar
-                    </a> 
-                </div>   
-                <a v-link="{name: 'bill-pay.list'}" class="waves-effect waves-light btn-large red white-text">
-                    <i class="material-icons right">cancel</i>Cancelar
-                </a>    
+        <div class="container">
+            <div class="row">                
+                <form name="form" @submit.prevent="submit">
+                    <div class="row">
+                        <div class="col s8">
+                            <label>Vencimento:</label>
+                            <input type="date" v-model="bille.date_due | dateFormat" class="validate"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col s8">
+                            <label>Nome:</label>
+                            <select v-model="bille.name | stringToUpperCase">
+                                <option v-for="o in names" v-model="o">{{ o | stringToUpperCase}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col s8">
+                            <label>Valor:</label>
+                            <input type="text" v-model="bille.value | numberFormat" class="form-control"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col s8">
+                            <label>Conta paga?</label>
+                            <input type="checkbox" v-model="bille.done"/>
+                        </div>
+                    </div>
+                    <div>
+                    <!--<input type="button" @click="submit" value="Enviar"/>-->
+                    <!--<button type="button" class="btn btn-primary" @click="submit">Enviar</button>-->
+                    <div class="row">
+                        <div class="col s5">
+                            <a href="#" @click="submit" class="waves-effect waves-light btn-large green darken-3 white-text">
+                                <i class="material-icons right">save</i>Salvar
+                            </a> 
+                        </div>   
+                        <div class="col s5">
+                            <a v-link="{name: 'bill-pay.list'}" class="waves-effect waves-light btn-large red white-text">
+                                <i class="material-icons right">cancel</i>Cancelar
+                            </a>
+                        </div>    
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     `,
     data() {
         return{
