@@ -10,18 +10,19 @@ window.billPayCreateComponent = Vue.extend({
     template: `
         <div class="container">
             <div class="row">                
-                <form name="form" @submit.prevent="submit">
+                <form name="form" @submit.prevent="submit" class="black-text">
                     <div class="row">
                         <div class="col s8">
-                            <label>Vencimento:</label>
+                            <label class="deep-purple-text darken-1s">Vencimento:</label>
                             <input type="date" v-model="bille.date_due | dateFormat" class="validate"/>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col s8">
-                            <label>Nome:</label>
-                            <select v-model="bille.name | stringToUpperCase">
+                            <label class="deep-purple-text darken-1s">Nome:</label>
+                            <select v-model="bille.name | stringToUpperCase" id="name" class="browser-default deep-purple lighten-5">
+                                <option value="" disabled selected>Escolha uma Conta</option>
                                 <option v-for="o in names" v-model="o">{{ o | stringToUpperCase}}</option>
                             </select>
                         </div>
@@ -29,15 +30,15 @@ window.billPayCreateComponent = Vue.extend({
                     
                     <div class="row">
                         <div class="col s8">
-                            <label>Valor:</label>
+                            <label class="deep-purple-text darken-1s">Valor:</label>
                             <input type="text" v-model="bille.value | numberFormat" class="form-control"/>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col s8">
-                            <label>Conta paga?</label>
-                            <input type="checkbox" v-model="bille.done"/>
+                            <label class="deep-purple-text darken-1s">Conta paga?</label>
+                            <input type="checkbox" v-model="bille.done" id="pago"/>
                         </div>
                     </div>
                     <div>
@@ -71,6 +72,9 @@ window.billPayCreateComponent = Vue.extend({
             this.formType = 'update';
             this.getBill(this.$route.params.id);
         }
+        $(document).ready(function () {
+            $('#name').material_select();
+        });
     },
     methods:{
         submit() {
