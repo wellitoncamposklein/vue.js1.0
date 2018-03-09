@@ -8,7 +8,7 @@ window.billComponent = Vue.extend({
         <div class="navbar-fixed">
             <nav class="deep-purple darken-1s">
                 <div class="nav-wrapper container">               
-                    <a href="#" class="right brand-logo">$ Contas</a>
+                    <a href="#" class="right brand-logo">Contas <i class="material-icons">local_grocery_store</i></a>
                     <a href="#" data-activates="nav-mobile" class="button-collapse">
                         <i class="material-icons">menu</i>
                     </a>

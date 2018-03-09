@@ -20,7 +20,17 @@ window.billPayCreateComponent = Vue.extend({
             <label>Conta paga?</label>
             <input type="checkbox" v-model="bille.done"/><br><br>
             <!--<input type="button" @click="submit" value="Enviar"/>-->
-            <button type="button" class="btn btn-primary" @click="submit">Enviar</button>
+            <!--<button type="button" class="btn btn-primary" @click="submit">Enviar</button>-->
+            <div class="row">
+                <div class="col s2">
+                    <a href="#" @click="submit" class="waves-effect waves-light btn-large">
+                        <i class="material-icons right">save</i>Salvar
+                    </a> 
+                </div>   
+                <a v-link="{name: 'bill-pay.list'}" class="waves-effect waves-light btn-large">
+                    <i class="material-icons right">cancel</i>Cancelar
+                </a>    
+            </div>
         </form>
     `,
     data() {

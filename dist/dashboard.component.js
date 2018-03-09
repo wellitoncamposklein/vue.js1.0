@@ -1,7 +1,7 @@
 "use strict";
 
 window.dashboardComponent = Vue.extend({
-    template: "\n        <div class=\"row align-items-center justify-content-center text-danger\">\n            <h5>{{ totalPago | currency 'Total a Pagar R$ ' 2 }}</h5>            \n        </div>\n        <div class=\"row align-items-center justify-content-center text-success\">\n            <h5>{{ totalRecebido | currency 'Total a Receber R$ ' 2 }}</h5>\n        </div>\n    ",
+    template: "\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"row align-items-center justify-content-center text-danger\">\n                    <h5 class=\"red-text\">{{ totalPago | currency 'Total a Pagar R$ ' 2 }}</h5>            \n                </div>\n                <div class=\"row align-items-center justify-content-center text-success\">\n                    <h5 class=\"green-text\">{{ totalRecebido | currency 'Total a Receber R$ ' 2 }}</h5>\n                </div>\n            </div>\n        </div>\n    ",
     data: function data() {
         return {
             totalPago: 0,

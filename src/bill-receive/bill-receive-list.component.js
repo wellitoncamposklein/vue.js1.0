@@ -12,7 +12,7 @@ window.billReceiveListComponent = Vue.extend({
                 color: red;
             }
         </style>
-        <table class="table table-striped table-dark z-depth-5 deep-purple lighten-4">
+        <table class="striped responsive-table z-depth-5 deep-purple lighten-4">
             <thead>
             <tr>
                 <th>Previsão</th>
@@ -30,9 +30,13 @@ window.billReceiveListComponent = Vue.extend({
                 <td :class="{'nao-pago': bill.done === false,'pago': bill.done === true}">
                     {{bill.done | doneLabel1}}
                 </td>
-                <td>
-                    <a v-link="{name: 'bill-receive.update', params: {id: bill.id}}">Editar</a> | 
-                    <a href="#" @click.prevent="deletebille(bill)">Excluir</a>
+                <td>                    
+                    <a v-link="{name: 'bill-receive.update', params: {id: bill.id}}">
+                        <i class="material-icons">mode_edit</i>
+                    </a>  
+                    <a href="#" @click.prevent="deletebille(bill)">
+                        <i class="material-icons">delete_forever</i>
+                    </a>
                 </td>
             </tr>
             </tbody>
