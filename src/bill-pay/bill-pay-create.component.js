@@ -36,11 +36,12 @@ window.billPayCreateComponent = Vue.extend({
                     </div>
                     
                     <div class="row">
-                        <div class="col s8">
-                            <label class="deep-purple-text darken-1s">Conta paga?</label>
-                            <input type="checkbox" v-model="bille.done" id="pago"/>
+                        <div class="col s8">                            
+                            <input type="checkbox" class="filled-in" v-model="bille.done" id="pago" id="pago"/>
+                            <label class="deep-purple-text darken-1s" for="pago">Conta paga?</label>
                         </div>
                     </div>
+                    
                     <div>
                     <!--<input type="button" @click="submit" value="Enviar"/>-->
                     <!--<button type="button" class="btn btn-primary" @click="submit">Enviar</button>-->
