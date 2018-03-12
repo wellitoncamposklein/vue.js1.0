@@ -38,6 +38,16 @@ window.billPayListComponent = Vue.extend({
                 </table>
             </div>
         </div>
+        <a id="btn-modal" href="#meu-modal" class="waves-effect waves-light btn modal-trigger">Abrir modal</a>
+        <div id="meu-modal" class="modal">
+            <div class="modal-content">
+                <h2>Meu primeiro modal</h2>
+                <p>Texto do primeiro modal</p>    
+            </div>
+            <div class="modal-footer">
+                <a class="modal-action modal-close waves-effect waves-green btn-flat green">OK</a>
+            </div>
+        </div>
     `,
     data () {
         return{
@@ -47,6 +57,9 @@ window.billPayListComponent = Vue.extend({
     },
     created() {
         Bills.query().then((response) => {this.bills = response.data;});
+        $(document).ready(function () {
+            $('.modal').modal();
+        })
     },
     methods:{
         deletebille (bille) {
