@@ -3,6 +3,9 @@
 * $root.$children[0 -> posicao dos filhos]) || ||  ||  ||  ||  ||
 * */
 window.billPayListComponent = Vue.extend({
+    components:{
+        'modal':window.modalComponent
+    },
     template:`        
         <div class="row">
             <div class="col s12 m12 l12">
@@ -48,6 +51,15 @@ window.billPayListComponent = Vue.extend({
                 <a class="modal-action modal-close waves-effect waves-green btn-flat green">OK</a>
             </div>
         </div>
+        <modal :modal="modal">
+            <div slot="content">
+                <h4>Mensagem de confirmação</h4>
+                <p><strong>Deseja excluir esta conta?</strong></p>
+            </div>
+            <div slot="footer">
+                <button class="btn btn-flat waves-effect green lighten-2 modal-close modal-action">OK</button>
+            </div>
+        </modal>
     `,
     data () {
         return{
