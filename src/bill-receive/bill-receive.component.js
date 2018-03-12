@@ -27,7 +27,8 @@ window.billReceiveComponent = Vue.extend({
                 </div>                       
             </div>
         </div>
-        <div class="container">                  
+        <div class="container">   
+            <div class="divider"></div>               
             <router-view></router-view>
         </div>
     `,

@@ -3,17 +3,10 @@
 * $root.$children[0 -> posicao dos filhos]) || ||  ||  ||  ||  ||
 * */
 window.billPayListComponent = Vue.extend({
-    template:`
-        <style type="text/css">
-            .pago{
-                color: green;
-            }
-            .nao-pago{
-                color: red;
-            }
-        </style>
+    template:`        
         <div class="row">
             <div class="col s12 m12 l12">
+                <h3>Minhas contas a receber</h3>
                 <table class="striped responsive-table z-depth-5 deep-purple lighten-4">
                     <thead>
                     <tr>
@@ -29,7 +22,7 @@ window.billPayListComponent = Vue.extend({
                         <td>{{bill.date_due | dateFormat}}</td>
                         <td>{{bill.name | stringToUpperCase}}</td>
                         <td>{{bill.value | numberFormat moneyFormat}}</td>
-                        <td :class="{'nao-pago': bill.done === false,'pago': bill.done === true}">
+                        <td class="white-text center-align" :class="{'green lighten-2': bill.done,'red lighten-2': !bill.done}">
                             {{bill.done | doneLabel}}
                         </td>
                         <td>
