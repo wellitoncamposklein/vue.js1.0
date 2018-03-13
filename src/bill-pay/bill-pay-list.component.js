@@ -92,6 +92,7 @@ window.billPayListComponent = Vue.extend({
             Bills.delete({id: this.billToDelete.id}).then((response) => {
                 self.bills.$remove(this.billToDelete);
                 this.billToDelete = null;
+                Materialize.toast('Conta excluída com sucesso!',3000);
                 self.$dispatch('change-info');
             });
         },

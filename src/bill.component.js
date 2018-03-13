@@ -5,7 +5,7 @@ window.billComponent = Vue.extend({
                 <a v-link="{name: item.routeName}">{{item.name}}</a>
             </li>                  
         </ul>
-        <div class="navbar-fixed">
+        <div>
             <nav class="deep-purple darken-1s">
                 <div class="nav-wrapper container">               
                     <a href="#" class="right brand-logo">Contas <i class="material-icons">local_grocery_store</i></a>
