@@ -32,7 +32,7 @@ window.billPayListComponent = Vue.extend({
                             <a v-link="{name: 'bill-pay.update', params: {id: bill.id}}">
                                 <i class="material-icons">mode_edit</i>
                             </a> 
-                            <a href="#" @click.prevent="deletebille(bill)">
+                            <a href="#" @click.prevent="openModalDelete()">
                                 <i class="material-icons">delete_forever</i>
                             </a>
                         </td>
@@ -57,14 +57,18 @@ window.billPayListComponent = Vue.extend({
                 <p><strong>Deseja excluir esta conta?</strong></p>
             </div>
             <div slot="footer">
-                <button class="btn btn-flat waves-effect green lighten-2 modal-close modal-action">OK</button>
+                <button class="btn btn-flat waves-effect green white-text modal-close modal-action">OK</button>
+                <button class="btn btn-flat waves-effect white-text red modal-close modal-action">Cancelar</button>
             </div>
         </modal>
     `,
     data () {
         return{
             bills:[],
-            moneyFormat: 'en-US'
+            moneyFormat: 'en-US',
+            modal:{
+                id: 'modal-delete'
+            }
         };
     },
     created() {
@@ -82,6 +86,9 @@ window.billPayListComponent = Vue.extend({
                     self.$dispatch('change-info');
                 });
             }
+        },
+        openModalDelete(){
+            $('#modal-delete').modal('open');
         }
     }
 });
