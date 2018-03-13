@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 
 gulp.task('default',function(){
-    console.log("minha primeira tarefa");
+    gulp.src('./node_modules/materialize-css/dist/fonts/roboto/**/*')
+        .pipe(gulp.dest('./dist/fonts/roboto'));
 });
