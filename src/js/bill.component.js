@@ -6,6 +6,7 @@ window.billComponent = Vue.extend({
             </li>                  
         </ul>
         <div>
+            <!--<nav>-->
             <nav class="deep-purple darken-1s">
                 <div class="nav-wrapper container">               
                     <a href="#" class="right brand-logo">Contas <i class="material-icons">local_grocery_store</i></a>

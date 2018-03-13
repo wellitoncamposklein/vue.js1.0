@@ -22,7 +22,7 @@ window.dashboardComponent = Vue.extend({
                                     <p class="card-title">
                                         <i class="material-icons">sentiment_very_satisfied</i>
                                     </p>
-                                    <h5>Total a Receber {{ totalRecebido | numberFormat 'pt-BR' }}</h5>
+                                    <h5 class="h5-titulo">Total a Receber {{ totalRecebido | numberFormat 'pt-BR' }}</h5>
                                 </div>
                             </div>
                         </a>                                            
