@@ -3,6 +3,9 @@
 * $root.$children[0 -> posicao dos filhos]) || ||  ||  ||  ||  ||
 * */
 window.billReceiveListComponent = Vue.extend({
+    components:{
+        'modal':window.modalComponent
+    },
     template:`
         <div class="row">
             <div class="col s12 m12 l12">        
@@ -29,7 +32,7 @@ window.billReceiveListComponent = Vue.extend({
                             <a v-link="{name: 'bill-receive.update', params: {id: bill.id}}">
                                 <i class="material-icons">mode_edit</i>
                             </a>  
-                            <a href="#" @click.prevent="deletebille(bill)">
+                            <a href="#" @click.prevent="openModalDelete(bill)">
                                 <i class="material-icons">delete_forever</i>
                             </a>
                         </td>
@@ -38,25 +41,53 @@ window.billReceiveListComponent = Vue.extend({
                 </table>
             </div>
         </div>
+        <modal :modal="modal">
+            <div slot="content">
+                <h4>Mensagem de confirmação</h4>
+                <p><strong>Deseja excluir esta conta?</strong></p>
+                <div class="divider"></div>
+                <p>Nome: <strong>{{billToDelete.name}}</strong></p>
+                <p>Valor: <strong>{{billToDelete.value | numberFormat moneyFormat}}</strong></p>
+                <p>Data de Vencimento: <strong>{{billToDelete.date_due | dateFormat}}</strong></p>
+                <div class="divider"></div>
+            </div>
+            <div slot="footer">
+                <button class="btn btn-flat waves-effect green white-text modal-close modal-action" @click="deletebille()">OK</button>
+                <button class="btn btn-flat waves-effect red white-text modal-close modal-action">Cancelar</button>
+            </div>
+        </modal>
     `,
     data () {
         return{
             bills:[],
-            moneyFormat: 'pt-BR'
+            billToDelete: null,
+            moneyFormat: 'pt-BR',
+            modal:{
+                id: 'modal-delete'
+            }
         };
     },
     created() {
         Receives.query().then((response) => {this.bills = response.data;});
+        $(document).ready(function () {
+            $('.modal').modal();
+        })
     },
     methods:{
-        deletebille (bille) {
-            if(confirm("Deseja realmente excluir essa conta?")){
-                let self = this;
-                Receives.deleted({id: bille.id}).then((response) => {
-                    self.bills.$remove(bille);
-                    self.$dispatch('change-info');
-                });
-            }
+        deletebille () {
+            // if(confirm("Deseja realmente excluir essa conta?")){
+            //
+            // }
+            let self = this;
+            Receives.deleted({id: this.billToDelete.id}).then((response) => {
+                self.bills.$remove(this.billToDelete);
+                this.billToDelete = null;
+                self.$dispatch('change-info');
+            });
+        },
+        openModalDelete(bill){
+            this.billToDelete = bill;
+            $('#modal-delete').modal('open');
         }
     }
 });
