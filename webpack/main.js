@@ -1,7 +1,3 @@
-require(['./clients'],function (colecao) {
-    console.log(colecao);
-});
+var colecao = require('./clients');
 
-// var colecao = require('./clients');
-//
-// console.log(colecao);
+console.log(colecao);
