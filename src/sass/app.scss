@@ -1,0 +1,24 @@
+//Marial Icons
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+@import "~materialize-css/sass/components/color";
+
+@import "variables";
+
+@import "~materialize-css/sass/materialize";
+
+.modal{
+  max-width: 45%;
+}
+
+.card{
+  border-radius: 8px;
+}
+
+.body-color{
+  @extend .deep-purple,.lighten-5
+}
+
+.table-style{
+  @extend .deep-purple, .lighten-4
+}
